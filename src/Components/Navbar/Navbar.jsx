@@ -15,14 +15,16 @@ const Navbar = () => {
       </div>
       <ul className="nav-menu">
         <li onClick={() => setMenu("shop")}>
-          Shop {menu === "shop" && <hr />}
+         <Link style={{textDecoration: 'none'}}>Shop</Link>   {menu ==="shop"?<hr/>:<></>}
         </li>
-        <li onClick={() => setMenu("men")}>Men {menu === "men" && <hr />}</li>
+        <li onClick={() => setMenu("men")}>
+          <Link style={{textDecoration: 'none'}}>Men</Link> {menu === "men" ? <hr />:<></>}
+        </li>
         <li onClick={() => setMenu("women")}>
-          Women {menu === "women" && <hr />}
+          <Link style={{textDecoration: 'none'}}>Women</Link> {menu === "women" ? <hr /> : <></>}
         </li>
         <li onClick={() => setMenu("kids")}>
-          Kids {menu === "kids" && <hr />}
+          <Link style={{textDecoration: 'none'}}>Kids</Link> {menu === "kids" ? <hr /> : <></>}
         </li>
       </ul>
       <div className="nav-login-cart">
