@@ -15,22 +15,38 @@ const Navbar = () => {
       </div>
       <ul className="nav-menu">
         <li onClick={() => setMenu("shop")}>
-         <Link style={{textDecoration: 'none'}}>Shop</Link>   {menu ==="shop"?<hr/>:<></>}
+          <Link to="/" style={{ textDecoration: "none" }}>
+            Shop
+          </Link>{" "}
+          {menu === "shop" ? <hr /> : <></>}
         </li>
         <li onClick={() => setMenu("men")}>
-          <Link style={{textDecoration: 'none'}}>Men</Link> {menu === "men" ? <hr />:<></>}
+          <Link to="/mens" style={{ textDecoration: "none" }}>
+            Men
+          </Link>{" "}
+          {menu === "men" ? <hr /> : <></>}
         </li>
         <li onClick={() => setMenu("women")}>
-          <Link style={{textDecoration: 'none'}}>Women</Link> {menu === "women" ? <hr /> : <></>}
+          <Link to="/womens" style={{ textDecoration: "none" }}>
+            Women
+          </Link>{" "}
+          {menu === "women" ? <hr /> : <></>}
         </li>
         <li onClick={() => setMenu("kids")}>
-          <Link style={{textDecoration: 'none'}}>Kids</Link> {menu === "kids" ? <hr /> : <></>}
+          <Link to="/kids" style={{ textDecoration: "none" }}>
+            Kids
+          </Link>{" "}
+          {menu === "kids" ? <hr /> : <></>}
         </li>
       </ul>
       <div className="nav-login-cart">
-        <button>Login</button>
-        <img src={cart_icon} alt="" />
-        <div className="nav_cart_count">0</div>
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+        
+          <img src={cart_icon} alt="" />
+          <div className="nav_cart_count">0</div>
+     
       </div>
     </div>
   );
