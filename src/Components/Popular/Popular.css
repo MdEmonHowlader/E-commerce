@@ -1,27 +1,121 @@
+/* Popular Section Container */
 .popular {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    height: 90vh;
+    gap: 20px;
+    margin: 100px auto;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    max-width: 1400px;
 }
 
-.popular h {
+/* Main Heading */
+.popular h1 {
     color: #171717;
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 2px;
+    position: relative;
+    background: linear-gradient(135deg, #171717, #4a4a4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+.popular h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(135deg, #ff4141, #ff6b6b);
+    border-radius: 2px;
+}
+
+/* Decorative Line */
 .popular hr {
     width: 200px;
     height: 6px;
+    border: none;
     border-radius: 10px;
-    background: #252525;
-
+    background: linear-gradient(135deg, #ff4141, #ff6b6b);
+    margin: 20px 0 40px 0;
+    box-shadow: 0 4px 15px rgba(255, 65, 65, 0.3);
 }
 
+/* Items Container */
 .popular-item {
-    margin-top: 50px;
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .popular {
+        margin: 80px auto;
+        padding: 50px 15px;
+    }
+
+    .popular h1 {
+        font-size: 42px;
+    }
+
+    .popular-item {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .popular {
+        margin: 60px auto;
+        padding: 40px 15px;
+    }
+
+    .popular h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+    }
+
+    .popular hr {
+        width: 150px;
+        height: 5px;
+    }
+
+    .popular-item {
+        gap: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .popular {
+        margin: 40px auto;
+        padding: 30px 10px;
+    }
+
+    .popular h1 {
+        font-size: 28px;
+    }
+
+    .popular hr {
+        width: 120px;
+        height: 4px;
+    }
+
+    .popular-item {
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
 }
