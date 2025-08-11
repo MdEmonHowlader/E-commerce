@@ -1,0 +1,182 @@
+.breadcrum {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 40px auto;
+    max-width: 1400px;
+    padding: 20px 40px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.breadcrum span {
+    color: #ff6b35;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 4px;
+    transition: color 0.3s ease;
+}
+
+/* Style individual breadcrumb items */
+.breadcrum> :not(span) {
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.breadcrum> :not(span):hover {
+    color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Last item (current page) styling */
+.breadcrum> :last-child {
+    color: #333;
+    font-weight: 600;
+    background: rgba(255, 107, 53, 0.15);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: default;
+}
+
+.breadcrum> :last-child:hover {
+    background: rgba(255, 107, 53, 0.15);
+    color: #333;
+}
+
+/* Enhanced arrow styling */
+.breadcrum span:hover {
+    color: #f7931e;
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .breadcrum {
+        margin: 30px auto;
+        padding: 18px 30px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrum {
+        margin: 20px auto;
+        padding: 15px 20px;
+        font-size: 15px;
+        gap: 6px;
+        border-radius: 10px;
+    }
+
+    .breadcrum span {
+        font-size: 16px;
+        margin: 0 2px;
+    }
+
+    .breadcrum> :not(span) {
+        padding: 3px 6px;
+    }
+
+    .breadcrum> :last-child {
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrum {
+        margin: 15px auto;
+        padding: 12px 15px;
+        font-size: 14px;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ff6b35 #f1f1f1;
+    }
+
+    .breadcrum::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .breadcrum::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 2px;
+    }
+
+    .breadcrum::-webkit-scrollbar-thumb {
+        background: #ff6b35;
+        border-radius: 2px;
+    }
+
+    .breadcrum::-webkit-scrollbar-thumb:hover {
+        background: #f7931e;
+    }
+
+    .breadcrum span {
+        font-size: 14px;
+    }
+
+    .breadcrum> :not(span) {
+        padding: 2px 4px;
+        font-size: 13px;
+    }
+
+    .breadcrum> :last-child {
+        padding: 4px 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+}
+
+/* Animation for page load */
+.breadcrum {
+    animation: slideInFromTop 0.5s ease-out;
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus states for accessibility */
+.breadcrum> :not(span):focus {
+    outline: 2px solid #ff6b35;
+    outline-offset: 2px;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Print styles */
+@media print {
+    .breadcrum {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        background: white;
+        color: black;
+    }
+
+    .breadcrum span {
+        color: black;
+    }
+
+    .breadcrum> :last-child {
+        background: #f0f0f0;
+        color: black;
+    }
+}
