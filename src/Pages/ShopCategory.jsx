@@ -21,9 +21,16 @@ const ShopCategory = ({ banner, category }) => {
       )}
       <div className="shopcategory-indexSort">
         <p>
-          <span>{filtered.length}</span> items
+          <span>Showing {filtered.length}</span> products
         </p>
-        <div className="shopcategory-sort">Sort ▼</div>
+        <div className="shopcategory-sort">
+          <select>
+            <option>Sort by Price</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest First</option>
+          </select>
+        </div>
       </div>
       <div className="shopcategory-products">
         {filtered.map((prod) => (
@@ -38,11 +45,12 @@ const ShopCategory = ({ banner, category }) => {
         ))}
       </div>
       {filtered.length === 0 && (
-        <p style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>
-          No products found.
-        </p>
+        <div className="no-products">
+          <h3>No products found</h3>
+          <p>Try browsing other categories</p>
+        </div>
       )}
-      <div className="shopcategory-loadmore">Load More</div>
+      <button className="shopcategory-loadmore">Load More Products</button>
     </div>
   );
 };
