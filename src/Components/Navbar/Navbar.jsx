@@ -1,7 +1,6 @@
 import React from "react";
 import "./navbar.css";
 import logo from "../Assets/logo.png";
-import cart_icon from "../Assets/cart_icon.png";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
@@ -91,9 +90,28 @@ const Navbar = () => {
             </button>
           </Link>
         )}
-        <Link to="/cart">
-          <img src={cart_icon} alt="cart" />
-          <div className="nav-cart-count">{getTotalCartItems()}</div>
+        <Link to="/cart" className="cart-link">
+          <div
+            className={`cart-container ${
+              getTotalCartItems() > 0 ? "has-items" : ""
+            }`}
+          >
+            <svg
+              className="cart-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            {getTotalCartItems() > 0 && (
+              <div className="cart-count-badge">
+                <span className="cart-count-text">{getTotalCartItems()}</span>
+              </div>
+            )}
+          </div>
         </Link>
       </div>
     </div>
