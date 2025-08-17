@@ -20,7 +20,18 @@
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 40px;
     color: white;
-    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-text {
+    text-align: left;
 }
 
 .settings-header h1 {
@@ -35,6 +46,49 @@
     font-size: 1.1rem;
     opacity: 0.9;
     font-weight: 500;
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Action buttons in header */
+.settings-header .user-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.settings-header .profile-btn:hover {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.5);
+    transform: translateY(-2px);
+}
+
+.settings-header .logout-btn:hover {
+    background: rgba(244, 67, 54, 0.3);
+    border-color: rgba(244, 67, 54, 0.5);
+    transform: translateY(-2px);
+}
+
+.settings-header .action-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
 }
 
 /* Messages */
@@ -437,6 +491,26 @@
 @media (max-width: 768px) {
     .settings-page {
         padding: 20px 10px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .header-text {
+        text-align: center;
+    }
+
+    .header-actions {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .settings-header .user-action-btn {
+        padding: 10px 16px;
+        font-size: 14px;
     }
 
     .settings-content {

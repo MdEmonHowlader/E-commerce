@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
 import "./Settings.css";
 
@@ -60,6 +61,10 @@ const Settings = () => {
   const showMessage = (type, text) => {
     setMessage({ type, text });
     setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   const handleAccountSave = async () => {
@@ -250,7 +255,6 @@ const Settings = () => {
     { id: "preferences", name: "Preferences", icon: "⚙️" },
     { id: "security", name: "Security", icon: "🔒" },
     { id: "privacy", name: "Privacy", icon: "🛡️" },
-    { id: "data", name: "Data & Export", icon: "📊" },
   ];
 
   if (!user) {
@@ -272,8 +276,42 @@ const Settings = () => {
     <div className="settings-page">
       <div className="settings-container">
         <div className="settings-header">
-          <h1>Settings</h1>
-          <p>Manage your account settings and preferences</p>
+          <div className="header-content">
+            <div className="header-text">
+              <h1>Settings</h1>
+              <p>Manage your account settings and preferences</p>
+            </div>
+            <div className="header-actions">
+              <Link to="/profile" className="user-action-btn profile-btn">
+                <svg
+                  className="action-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="user-action-btn logout-btn"
+              >
+                <svg
+                  className="action-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16,17 21,12 16,7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
 
         {message.text && (
@@ -380,9 +418,6 @@ const Settings = () => {
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
-                      <option value="prefer-not-to-say">
-                        Prefer not to say
-                      </option>
                     </select>
                   </div>
 
@@ -898,7 +933,7 @@ const Settings = () => {
               </div>
             )}
 
-            {activeTab === "data" && (
+            {/* {activeTab === "data" && (
               <div className="settings-section">
                 <div className="section-header">
                   <h2>Data Management</h2>
@@ -937,7 +972,7 @@ const Settings = () => {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
