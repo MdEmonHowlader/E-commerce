@@ -4,8 +4,14 @@ import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
 
 const CartItems = () => {
-  const { all_product, cartItems, removeFromCart, getTotalCartAmount } =
-    useContext(ShopContext);
+  const {
+    all_product,
+    cartItems,
+    removeItemCompletely,
+    increaseQuantity,
+    decreaseQuantity,
+    getTotalCartAmount,
+  } = useContext(ShopContext);
   return (
     <div className="cartItems">
       <div className="cartItems-format-main">
@@ -30,14 +36,30 @@ const CartItems = () => {
                 />
                 <p>{e.name}</p>
                 <p>$ {e.new_price}</p>
-                <button className="cartItem-quantity">{cartItems[e.id]}</button>
+                <div className="cartItem-quantity-controls">
+                  <button
+                    className="cartItem-quantity-btn decrease"
+                    onClick={() => decreaseQuantity(e.id)}
+                  >
+                    -
+                  </button>
+                  <span className="cartItem-quantity-display">
+                    {cartItems[e.id]}
+                  </span>
+                  <button
+                    className="cartItem-quantity-btn increase"
+                    onClick={() => increaseQuantity(e.id)}
+                  >
+                    +
+                  </button>
+                </div>
                 <p>$ {e.new_price * cartItems[e.id]}</p>
                 <img
                   className="cartItem-remove-icon"
                   src={remove_icon}
                   alt="remove"
                   onClick={() => {
-                    removeFromCart(e.id);
+                    removeItemCompletely(e.id);
                   }}
                 />
               </div>

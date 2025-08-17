@@ -29,7 +29,39 @@ const ShopContextProvider = (props) => {
   };
 
   const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    setCartItems((prev) => {
+      const newCart = { ...prev };
+      if (newCart[itemId] > 1) {
+        newCart[itemId] = newCart[itemId] - 1;
+      } else {
+        delete newCart[itemId];
+      }
+      return newCart;
+    });
+  };
+
+  const increaseQuantity = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
+  };
+
+  const decreaseQuantity = (itemId) => {
+    setCartItems((prev) => {
+      const newCart = { ...prev };
+      if (newCart[itemId] > 1) {
+        newCart[itemId] = newCart[itemId] - 1;
+      } else {
+        delete newCart[itemId];
+      }
+      return newCart;
+    });
+  };
+
+  const removeItemCompletely = (itemId) => {
+    setCartItems((prev) => {
+      const newCart = { ...prev };
+      delete newCart[itemId];
+      return newCart;
+    });
   };
 
   const clearCart = () => {
@@ -68,6 +100,9 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    removeItemCompletely,
     clearCart,
   };
 
