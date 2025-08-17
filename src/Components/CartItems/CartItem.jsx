@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CartItem.css";
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
@@ -11,7 +12,19 @@ const CartItems = () => {
     increaseQuantity,
     decreaseQuantity,
     getTotalCartAmount,
+    isLoggedIn,
   } = useContext(ShopContext);
+
+  const navigate = useNavigate();
+
+  const handleProceedToCheckout = () => {
+    if (!isLoggedIn) {
+      // Redirect to login with the checkout as the intended destination
+      navigate("/login", { state: { from: { pathname: "/checkout" } } });
+    } else {
+      navigate("/checkout");
+    }
+  };
   return (
     <div className="cartItems">
       <div className="cartItems-format-main">
@@ -88,7 +101,9 @@ const CartItems = () => {
               <h3>${getTotalCartAmount()}</h3>
             </div>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
+          <button onClick={handleProceedToCheckout} className="checkout-btn">
+            {isLoggedIn ? "PROCEED TO CHECKOUT" : "LOGIN TO CHECKOUT"}
+          </button>
         </div>
         <div className="cartItems-promocode">
           <p>If you have a promo code, Enter it here</p>

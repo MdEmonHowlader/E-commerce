@@ -185,7 +185,8 @@
     color: #111;
 }
 
-.cartItems-total button {
+.cartItems-total button,
+.checkout-btn {
     margin-top: 26px;
     width: 100%;
     background: linear-gradient(135deg, #111, #333);
@@ -199,6 +200,17 @@
     cursor: pointer;
     box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.3);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.checkout-btn:hover {
+    background: linear-gradient(135deg, #222, #000);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 22px -10px rgba(0, 0, 0, 0.4);
+}
+
+.checkout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.4);
 }
 
 .cartItems-total button:hover {

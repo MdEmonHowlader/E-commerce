@@ -87,7 +87,208 @@
     gap: 45px;
 }
 
-.nav-login-cart button {
+.nav-user-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+/* User Avatar */
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.avatar-text {
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* User Dropdown */
+.user-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user-greeting {
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.user-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Action Buttons */
+.user-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.user-action-btn:hover::before {
+    left: 100%;
+}
+
+.profile-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.profile-btn:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+.settings-btn {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.settings-btn:hover {
+    background: linear-gradient(135deg, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, #d32f2f, #c62828);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+}
+
+/* Login Button */
+.login-link {
+    text-decoration: none;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.login-btn:hover::before {
+    left: 100%;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    border-color: #764ba2;
+}
+
+/* Action Icons */
+.action-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+.nav-username {
+    color: #515151;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.profile-link {
+    color: #515151;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #7a7a7a;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.profile-link:hover {
+    background: #ff4141;
+    color: white;
+    border-color: #ff4141;
+    transform: translateY(-1px);
+}
+
+/* Old button styles - keeping for backward compatibility */
+.nav-login-cart button:not(.user-action-btn):not(.login-btn) {
     width: 157px;
     height: 58px;
     outline: none;
@@ -101,7 +302,15 @@
     transition: all 0.3s ease;
 }
 
-.nav-login-cart button:hover {
+.logout-btn {
+    width: 120px;
+    height: 45px;
+    font-size: 16px;
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.nav-login-cart button:not(.user-action-btn):not(.login-btn):hover {
     background: #ff4141;
     color: white;
     border-color: #ff4141;
@@ -119,7 +328,7 @@
     transform: scale(1.1);
 }
 
-.nav_cart_count{
+.nav_cart_count {
     width: 22px;
     height: 22px;
     display: flex;
@@ -190,7 +399,7 @@
         font-size: 20px;
     }
 
-    .nav-login-cart button {
+    .nav-login-cart button:not(.user-action-btn):not(.login-btn) {
         width: 100px;
         height: 40px;
         font-size: 14px;
@@ -198,5 +407,106 @@
 
     .nav-login-cart {
         gap: 20px;
+    }
+
+    /* Responsive user section */
+    .user-dropdown {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .user-greeting {
+        display: none;
+    }
+
+    .user-actions {
+        gap: 8px;
+    }
+
+    .user-action-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* For very small screens, show only icons */
+    @media (max-width: 600px) {
+        .user-actions {
+            flex-direction: row;
+            gap: 6px;
+        }
+
+        .user-action-btn {
+            padding: 8px;
+            min-width: auto;
+        }
+
+        .user-action-btn span:not(.action-icon) {
+            display: none;
+        }
+    }
+
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .avatar-text {
+        font-size: 14px;
+    }
+
+    .login-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .action-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Extra small devices (phones, 480px and down) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .nav-user-section {
+        gap: 8px;
+    }
+
+    .user-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .user-action-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 70px;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .avatar-text {
+        font-size: 12px;
+    }
+
+    .login-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .action-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Show text or icon only for very small screens */
+    .user-action-btn span:not(.action-icon) {
+        display: none;
     }
 }

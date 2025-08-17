@@ -16,13 +16,32 @@ const getDefaultCart = () => {
   return {};
 };
 
+const getAuthState = () => {
+  // Try to get auth state from localStorage
+  const savedAuth = localStorage.getItem("userAuth");
+  if (savedAuth) {
+    try {
+      return JSON.parse(savedAuth);
+    } catch (error) {
+      console.error("Error parsing saved auth:", error);
+    }
+  }
+  return { isLoggedIn: false, user: null };
+};
+
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [authState, setAuthState] = useState(getAuthState());
 
   // Save cart to localStorage whenever cartItems changes
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
+
+  // Save auth state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("userAuth", JSON.stringify(authState));
+  }, [authState]);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
@@ -68,6 +87,28 @@ const ShopContextProvider = (props) => {
     setCartItems({});
   };
 
+  // Authentication functions
+  const login = (userData) => {
+    setAuthState({
+      isLoggedIn: true,
+      user: userData,
+    });
+  };
+
+  const logout = () => {
+    setAuthState({
+      isLoggedIn: false,
+      user: null,
+    });
+  };
+
+  const updateUser = (updatedUserData) => {
+    setAuthState((prev) => ({
+      ...prev,
+      user: { ...prev.user, ...updatedUserData },
+    }));
+  };
+
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -104,6 +145,12 @@ const ShopContextProvider = (props) => {
     decreaseQuantity,
     removeItemCompletely,
     clearCart,
+    // Authentication
+    isLoggedIn: authState.isLoggedIn,
+    user: authState.user,
+    login,
+    logout,
+    updateUser,
   };
 
   return (
