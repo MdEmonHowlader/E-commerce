@@ -1,18 +1,39 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import all_product from "./../Components/Assets/all_product";
 
 export const ShopContext = createContext(null);
 
+const getDefaultCart = () => {
+  // Try to get cart from localStorage first
+  const savedCart = localStorage.getItem("cartItems");
+  if (savedCart) {
+    try {
+      return JSON.parse(savedCart);
+    } catch (error) {
+      console.error("Error parsing saved cart:", error);
+    }
+  }
+  return {};
+};
+
 const ShopContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(getDefaultCart());
+
+  // Save cart to localStorage whenever cartItems changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
-    console.log("Added to cart:", itemId);
   };
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  };
+
+  const clearCart = () => {
+    setCartItems({});
   };
 
   const getTotalCartAmount = () => {
@@ -47,6 +68,7 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     removeFromCart,
+    clearCart,
   };
 
   return (

@@ -119,7 +119,7 @@
     transform: scale(1.1);
 }
 
-.nav_cart_count {
+.nav_cart_count{
     width: 22px;
     height: 22px;
     display: flex;
@@ -130,8 +130,7 @@
     border-radius: 11px;
     font-size: 14px;
     background: red;
-    color: white;
-    font-weight: 600;
+    color: rgb(255, 255, 255);
 }
 
 /* Responsive Design */
