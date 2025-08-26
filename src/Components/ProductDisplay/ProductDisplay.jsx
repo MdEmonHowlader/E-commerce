@@ -31,7 +31,18 @@ const ProductDisplay = (props) => {
           <img src={product.image} alt="" />
         </div>
         <div className="productdisplay-img">
-          <img className="productdisplay-main-img" src={product.image} alt="" />
+          <img
+            className="productdisplay-main-img"
+            src={product.image}
+            alt={product.name || "Product Image"}
+            onError={(e) => {
+              console.error("Main image failed to load:", product.image);
+              e.target.style.display = "block";
+            }}
+            onLoad={() => {
+              console.log("Main image loaded successfully");
+            }}
+          />
         </div>
       </div>
       <div className="productdisplay-right">
