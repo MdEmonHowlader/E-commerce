@@ -77,11 +77,11 @@ const Navbar = () => {
       <div className="nav-login-cart desktop-actions">
         {isLoggedIn ? (
           <div className="nav-user-section">
-            <div className="user-avatar">
-              <span className="avatar-text">
+            {/* <div className="user-avatar">
+             <span className="avatar-text">
                 {user?.name?.charAt(0).toUpperCase()}
               </span>
-            </div>
+            </div> */}
             <div className="user-dropdown">
               <span className="user-greeting">Hello, {user?.name}</span>
               <div className="user-actions">

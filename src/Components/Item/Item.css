@@ -125,6 +125,30 @@
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .item {
+        max-width: 300px;
+        padding: 18px;
+    }
+
+    .item img {
+        height: 280px;
+    }
+
+    .item p {
+        font-size: 15px;
+        margin: 8px 0;
+    }
+
+    .item-price-new {
+        font-size: 19px;
+    }
+
+    .item-price-old {
+        font-size: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     .item {
         max-width: 280px;
@@ -137,6 +161,8 @@
 
     .item p {
         font-size: 15px;
+        margin: 8px 0;
+        line-height: 1.3;
     }
 
     .item-price-new {
@@ -146,20 +172,65 @@
     .item-price-old {
         font-size: 15px;
     }
+
+    .item-prices {
+        gap: 12px;
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .item {
+        max-width: 260px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .item img {
+        height: 220px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+    }
+
+    .item p {
+        font-size: 14px;
+        margin: 6px 0;
+        line-height: 1.3;
+    }
+
+    .item-price-new {
+        font-size: 17px;
+    }
+
+    .item-price-old {
+        font-size: 14px;
+    }
+
+    .item-prices {
+        gap: 10px;
+        margin-top: 10px;
+        padding-top: 10px;
+    }
 }
 
 @media (max-width: 480px) {
     .item {
         max-width: 240px;
-        padding: 12px;
+        padding: 10px;
+        border-radius: 10px;
     }
 
     .item img {
         height: 200px;
+        border-radius: 6px;
+        margin-bottom: 10px;
     }
 
     .item p {
         font-size: 14px;
+        margin: 5px 0;
+        line-height: 1.2;
     }
 
     .item-price-new {
@@ -168,5 +239,50 @@
 
     .item-price-old {
         font-size: 14px;
+    }
+
+    .item-prices {
+        gap: 8px;
+        margin-top: 8px;
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .item {
+        max-width: 200px;
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+    .item img {
+        height: 170px;
+        border-radius: 5px;
+        margin-bottom: 8px;
+    }
+
+    .item p {
+        font-size: 13px;
+        margin: 4px 0;
+        line-height: 1.2;
+    }
+
+    .item-price-new {
+        font-size: 15px;
+    }
+
+    .item-price-old {
+        font-size: 13px;
+    }
+
+    .item-prices {
+        gap: 6px;
+        margin-top: 6px;
+        padding-top: 6px;
+    }
+
+    .item-price-new::before,
+    .item-price-old::before {
+        font-size: 12px;
     }
 }

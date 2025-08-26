@@ -50,7 +50,7 @@ const Settings = () => {
     loginAlerts: localStorage.getItem("loginAlerts") !== "false",
   });
 
-  // Privacy State
+//  Privacy State
   const [privacyData, setPrivacyData] = useState({
     profileVisibility: localStorage.getItem("profileVisibility") || "private",
     dataSharing: localStorage.getItem("dataSharing") !== "false",
@@ -254,7 +254,7 @@ const Settings = () => {
     { id: "address", name: "Address", icon: "📍" },
     { id: "preferences", name: "Preferences", icon: "⚙️" },
     { id: "security", name: "Security", icon: "🔒" },
-    { id: "privacy", name: "Privacy", icon: "🛡️" },
+    
   ];
 
   if (!user) {
@@ -830,108 +830,7 @@ const Settings = () => {
               </div>
             )}
 
-            {activeTab === "privacy" && (
-              <div className="settings-section">
-                <div className="section-header">
-                  <h2>Privacy Settings</h2>
-                  <p>Control how your data is used</p>
-                </div>
-
-                <div className="privacy-sections">
-                  <div className="privacy-group">
-                    <h3>Profile Privacy</h3>
-                    <div className="form-group">
-                      <label>Profile Visibility</label>
-                      <select
-                        value={privacyData.profileVisibility}
-                        onChange={(e) =>
-                          setPrivacyData({
-                            ...privacyData,
-                            profileVisibility: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="public">Public</option>
-                        <option value="friends">Friends Only</option>
-                        <option value="private">Private</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="privacy-group">
-                    <h3>Data Usage</h3>
-                    <div className="toggle-group">
-                      <div className="toggle-item">
-                        <label>
-                          <input
-                            type="checkbox"
-                            checked={privacyData.dataSharing}
-                            onChange={(e) =>
-                              setPrivacyData({
-                                ...privacyData,
-                                dataSharing: e.target.checked,
-                              })
-                            }
-                          />
-                          <span className="toggle-text">Data Sharing</span>
-                          <span className="toggle-description">
-                            Allow sharing of anonymized data for research
-                          </span>
-                        </label>
-                      </div>
-
-                      <div className="toggle-item">
-                        <label>
-                          <input
-                            type="checkbox"
-                            checked={privacyData.activityTracking}
-                            onChange={(e) =>
-                              setPrivacyData({
-                                ...privacyData,
-                                activityTracking: e.target.checked,
-                              })
-                            }
-                          />
-                          <span className="toggle-text">Activity Tracking</span>
-                          <span className="toggle-description">
-                            Track your activity to improve recommendations
-                          </span>
-                        </label>
-                      </div>
-
-                      <div className="toggle-item">
-                        <label>
-                          <input
-                            type="checkbox"
-                            checked={privacyData.personalization}
-                            onChange={(e) =>
-                              setPrivacyData({
-                                ...privacyData,
-                                personalization: e.target.checked,
-                              })
-                            }
-                          />
-                          <span className="toggle-text">Personalization</span>
-                          <span className="toggle-description">
-                            Use your data to personalize your experience
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="section-actions">
-                  <button
-                    onClick={handlePrivacySave}
-                    disabled={isLoading}
-                    className="save-btn"
-                  >
-                    {isLoading ? "Saving..." : "Save Privacy Settings"}
-                  </button>
-                </div>
-              </div>
-            )}
+           
 
             {/* {activeTab === "data" && (
               <div className="settings-section">
