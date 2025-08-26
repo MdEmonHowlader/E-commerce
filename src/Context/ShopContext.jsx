@@ -43,48 +43,108 @@ const ShopContextProvider = (props) => {
     localStorage.setItem("userAuth", JSON.stringify(authState));
   }, [authState]);
 
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
+  const addToCart = (itemId, size = "M") => {
+    const cartKey = `${itemId}_${size}`;
+    setCartItems((prev) => ({
+      ...prev,
+      [cartKey]: (prev[cartKey] || 0) + 1,
+    }));
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = (itemId, size = null) => {
+    if (size) {
+      const cartKey = `${itemId}_${size}`;
+      setCartItems((prev) => {
+        const newCart = { ...prev };
+        if (newCart[cartKey] > 1) {
+          newCart[cartKey] = newCart[cartKey] - 1;
+        } else {
+          delete newCart[cartKey];
+        }
+        return newCart;
+      });
+    } else {
+      // Remove all sizes of this item
+      setCartItems((prev) => {
+        const newCart = { ...prev };
+        Object.keys(newCart).forEach((key) => {
+          if (key.startsWith(`${itemId}_`)) {
+            delete newCart[key];
+          }
+        });
+        return newCart;
+      });
+    }
+  };
+
+  const increaseQuantity = (itemId, size) => {
+    const cartKey = `${itemId}_${size}`;
+    setCartItems((prev) => ({
+      ...prev,
+      [cartKey]: (prev[cartKey] || 0) + 1,
+    }));
+  };
+
+  const decreaseQuantity = (itemId, size) => {
+    const cartKey = `${itemId}_${size}`;
     setCartItems((prev) => {
       const newCart = { ...prev };
-      if (newCart[itemId] > 1) {
-        newCart[itemId] = newCart[itemId] - 1;
+      if (newCart[cartKey] > 1) {
+        newCart[cartKey] = newCart[cartKey] - 1;
       } else {
-        delete newCart[itemId];
+        delete newCart[cartKey];
       }
       return newCart;
     });
   };
 
-  const increaseQuantity = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
-  };
-
-  const decreaseQuantity = (itemId) => {
-    setCartItems((prev) => {
-      const newCart = { ...prev };
-      if (newCart[itemId] > 1) {
-        newCart[itemId] = newCart[itemId] - 1;
-      } else {
-        delete newCart[itemId];
-      }
-      return newCart;
-    });
-  };
-
-  const removeItemCompletely = (itemId) => {
-    setCartItems((prev) => {
-      const newCart = { ...prev };
-      delete newCart[itemId];
-      return newCart;
-    });
+  const removeItemCompletely = (itemId, size = null) => {
+    if (size) {
+      const cartKey = `${itemId}_${size}`;
+      setCartItems((prev) => {
+        const newCart = { ...prev };
+        delete newCart[cartKey];
+        return newCart;
+      });
+    } else {
+      // Remove all sizes of this item
+      setCartItems((prev) => {
+        const newCart = { ...prev };
+        Object.keys(newCart).forEach((key) => {
+          if (key.startsWith(`${itemId}_`)) {
+            delete newCart[key];
+          }
+        });
+        return newCart;
+      });
+    }
   };
 
   const clearCart = () => {
     setCartItems({});
+  };
+
+  // Helper function to get cart items with size information
+  const getCartItemsWithSizes = () => {
+    const cartItemsArray = [];
+
+    Object.keys(cartItems).forEach((cartKey) => {
+      if (cartItems[cartKey] > 0) {
+        const [itemId, size] = cartKey.split("_");
+        const product = all_product.find((p) => p.id === Number(itemId));
+
+        if (product) {
+          cartItemsArray.push({
+            ...product,
+            size: size,
+            quantity: cartItems[cartKey],
+            cartKey: cartKey,
+          });
+        }
+      }
+    });
+
+    return cartItemsArray;
   };
 
   // Authentication functions
@@ -111,13 +171,14 @@ const ShopContextProvider = (props) => {
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
+    for (const cartKey in cartItems) {
+      if (cartItems[cartKey] > 0) {
+        const [itemId] = cartKey.split("_");
         let itemInfo = all_product.find(
-          (product) => product.id === Number(item)
+          (product) => product.id === Number(itemId)
         );
         if (itemInfo) {
-          totalAmount += itemInfo.new_price * cartItems[item];
+          totalAmount += itemInfo.new_price * cartItems[cartKey];
         }
       }
     }
@@ -126,9 +187,9 @@ const ShopContextProvider = (props) => {
 
   const getTotalCartItems = () => {
     let totalItem = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        totalItem += cartItems[item];
+    for (const cartKey in cartItems) {
+      if (cartItems[cartKey] > 0) {
+        totalItem += cartItems[cartKey];
       }
     }
     return totalItem;
@@ -145,6 +206,7 @@ const ShopContextProvider = (props) => {
     decreaseQuantity,
     removeItemCompletely,
     clearCart,
+    getCartItemsWithSizes,
     // Authentication
     isLoggedIn: authState.isLoggedIn,
     user: authState.user,

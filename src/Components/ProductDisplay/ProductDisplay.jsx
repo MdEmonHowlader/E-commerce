@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./ProductDisplay.css";
 import star_icon from "../Assets/star_icon.png";
 import star_dull_icon from "../Assets/star_dull_icon.png";
@@ -7,6 +7,19 @@ import { ShopContext } from "../../Context/ShopContext";
 const ProductDisplay = (props) => {
   const { product } = props;
   const { addToCart } = useContext(ShopContext);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("Please select a size before adding to cart");
+      return;
+    }
+    addToCart(product.id, selectedSize);
+    setShowSuccess(true);
+    // Hide success message after 3 seconds
+    setTimeout(() => setShowSuccess(false), 3000);
+  };
   return (
     <div className="productDisplay">
       {console.log(props.product)}
@@ -48,17 +61,30 @@ const ProductDisplay = (props) => {
         <div className="productdisplay-right-size">
           <h1>Select Size</h1>
           <div className="productdisplay-right-sizes">
-            <div>S</div>
-            <div>M</div>
-            <div>L</div>
-            <div>XL</div>
-            <div>XXL</div>
+            {["S", "M", "L", "XL", "XXL"].map((size) => (
+              <div
+                key={size}
+                className={selectedSize === size ? "selected" : ""}
+                onClick={() => setSelectedSize(size)}
+              >
+                {size}
+              </div>
+            ))}
           </div>
+          {selectedSize && (
+            <p className="selected-size-display">
+              Selected Size: <span>{selectedSize}</span>
+            </p>
+          )}
         </div>
+        {showSuccess && (
+          <div className="success-message">
+            ✅ Added {product.name} (Size: {selectedSize}) to cart!
+          </div>
+        )}
         <button
-          onClick={() => {
-            addToCart(product.id);
-          }}
+          onClick={handleAddToCart}
+          className={!selectedSize ? "disabled" : ""}
         >
           ADD TO CART
         </button>
